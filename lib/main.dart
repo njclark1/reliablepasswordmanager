@@ -41,10 +41,8 @@ class Home extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       )),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CreateAccount()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Login()));
                   },
                   //styling for button icon
                   icon: const Icon(
