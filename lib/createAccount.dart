@@ -70,6 +70,8 @@ Widget createNewPassword(BuildContext context) {
   TextEditingController newServiceController = new TextEditingController();
   TextEditingController newUsernameController = new TextEditingController();
   TextEditingController newPasswordController = new TextEditingController();
+  List<passwordType> accounts = [];
+
   return new AlertDialog(
     title: const Text('New service'),
     content: new Column(
@@ -111,8 +113,10 @@ Widget createNewPassword(BuildContext context) {
               primary: Colors.deepPurple[300],
             ),
             onPressed: () {
-              passwordType(newServiceValue, newUsername, newPassword);
-              print(newServiceValue + newUsername + newPassword);
+              accounts
+                  .add(passwordType(newServiceValue, newUsername, newPassword));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CreateAccount()));
             },
             child: const Text("Submit")),
       ],
