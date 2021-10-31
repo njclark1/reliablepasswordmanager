@@ -16,6 +16,8 @@ class _LoginState extends State<Login> {
   @override
   String correctUser = "password";
   String correctPass = "username";
+  String givenUser = "";
+  String givenPass = "";
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
@@ -24,7 +26,7 @@ class _LoginState extends State<Login> {
         //header bar properties
         appBar: AppBar(
           title: Text(
-            'World\'s Most Reliable Password Manager',
+            'Login',
             style: TextStyle(fontFamily: 'Mono'),
           ),
           centerTitle: true,
@@ -45,6 +47,9 @@ class _LoginState extends State<Login> {
                 alignment: Alignment.center,
                 width: 500,
                 child: TextFormField(
+                  controller: usernameController,
+                  onChanged: (String value) =>
+                      givenUser = usernameController.text,
                   decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       hintText: 'username is password',
@@ -56,6 +61,10 @@ class _LoginState extends State<Login> {
                 alignment: Alignment.center,
                 width: 500,
                 child: TextFormField(
+                  controller: passwordController,
+                  onChanged: (String value) =>
+                      givenPass = passwordController.text,
+                  obscureText: true,
                   decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
                       hintText: 'password is username',
@@ -75,10 +84,15 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(50),
                           )),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Passwords()));
+                        setState(() {
+                          if (givenUser == correctUser &&
+                              givenPass == correctPass) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Passwords()));
+                          }
+                        });
                       },
                       //styling for button icon
                       icon: const Icon(

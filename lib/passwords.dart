@@ -13,7 +13,7 @@ class Passwords extends StatelessWidget {
         //header bar properties
         appBar: AppBar(
           title: Text(
-            'World\'s Most Reliable Password Manager',
+            'Passwords',
             style: TextStyle(fontFamily: 'Mono'),
           ),
           centerTitle: true,
