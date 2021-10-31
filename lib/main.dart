@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:myapp/passwords.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
@@ -53,32 +54,6 @@ class Home extends StatelessWidget {
                     'Let\'s Get Started!',
                     style: TextStyle(fontSize: 50),
                   ))),
-        ));
-  }
-}
-
-//build List screen
-class List extends StatelessWidget {
-  const List({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        //header bar properties
-        appBar: AppBar(
-          title: Text(
-            'World\'s Greatest Password Manager',
-            style: TextStyle(fontFamily: 'Mono'),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.deepPurple[300],
-        ),
-        //Homescreen Image
-        body: Container(
-          //body container properties
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/lock.jpeg'), fit: BoxFit.cover)),
         ));
   }
 }
