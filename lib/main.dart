@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'login.dart';
-import 'passwords.dart';
+import 'package:myapp/login.dart';
+import 'package:myapp/passwords.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
