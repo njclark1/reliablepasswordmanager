@@ -3,7 +3,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:myapp/login.dart';
-import 'package:myapp/passwords.dart';
+import 'package:myapp/createAccount.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
@@ -41,8 +41,10 @@ class Home extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       )),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Passwords()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateAccount()));
                   },
                   //styling for button icon
                   icon: const Icon(

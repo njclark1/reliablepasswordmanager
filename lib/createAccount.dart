@@ -2,22 +2,18 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-
-abstract class password {
-  String serviceValue = "";
-  String usernameValue = "";
-  String passwordValue = "";
-}
+import 'package:flutter/rendering.dart';
+import 'accounts.dart';
 
 //build List screen
-class Passwords extends StatefulWidget {
-  const Passwords({Key? key}) : super(key: key);
+class CreateAccount extends StatefulWidget {
+  const CreateAccount({Key? key}) : super(key: key);
 
   @override
-  State<Passwords> createState() => _PasswordsState();
+  State<CreateAccount> createState() => _CreateAccountState();
 }
 
-class _PasswordsState extends State<Passwords> {
+class _CreateAccountState extends State<CreateAccount> {
   @override
 
   //variables
@@ -89,6 +85,7 @@ Widget createNewPassword(BuildContext context) {
               hintText: 'enter name of service',
               labelText: 'Service'),
         ),
+        Padding(padding: const EdgeInsets.all(20)),
         TextFormField(
           controller: newUsernameController,
           onChanged: (String value) => newUsername = newUsernameController.text,
@@ -98,6 +95,7 @@ Widget createNewPassword(BuildContext context) {
               hintText: 'enter username',
               labelText: 'Username'),
         ),
+        Padding(padding: const EdgeInsets.all(20)),
         TextFormField(
           controller: newPasswordController,
           onChanged: (String value) => newPassword = newPasswordController.text,
@@ -107,6 +105,16 @@ Widget createNewPassword(BuildContext context) {
               hintText: 'enter password',
               labelText: 'Password'),
         ),
+        Padding(padding: const EdgeInsets.all(20)),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.deepPurple[300],
+            ),
+            onPressed: () {
+              passwordType(newServiceValue, newUsername, newPassword);
+              print(newServiceValue + newUsername + newPassword);
+            },
+            child: const Text("Submit")),
       ],
     ),
   );
