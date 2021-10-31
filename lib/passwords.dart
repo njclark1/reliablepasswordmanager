@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:myapp/passwords.dart';
 
 //build List screen
 class List extends StatelessWidget {
@@ -14,7 +13,7 @@ class List extends StatelessWidget {
         //header bar properties
         appBar: AppBar(
           title: Text(
-            'World\'s Most Reliable Password Manager',
+            'World\'s Most Reliable Password Manager-PASSWORDS',
             style: TextStyle(fontFamily: 'Mono'),
           ),
           centerTitle: true,

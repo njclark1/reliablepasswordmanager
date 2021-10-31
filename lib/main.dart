@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:myapp/passwords.dart';
+import 'login.dart';
+import 'passwords.dart';
 
 void main() => runApp(MaterialApp(home: Home()));
 
@@ -41,7 +42,7 @@ class Home extends StatelessWidget {
                       )),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => List()));
+                        MaterialPageRoute(builder: (context) => Login()));
                   },
                   //styling for button icon
                   icon: const Icon(
