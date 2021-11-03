@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:myapp/createAccount.dart';
+import 'package:myapp/accountList.dart';
 
 //build List screen
 class Login extends StatefulWidget {
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CreateAccount()));
+                                    builder: (context) => accountList()));
                           }
                         });
                       },

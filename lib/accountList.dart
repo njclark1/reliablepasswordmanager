@@ -1,19 +1,24 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'accounts.dart';
+import 'package:myapp/main.dart';
+import 'accountClass.dart';
+
+// list of accounts
+List<account> accounts = [];
 
 //build List screen
-class CreateAccount extends StatefulWidget {
-  const CreateAccount({Key? key}) : super(key: key);
+class accountList extends StatefulWidget {
+  const accountList({Key? key}) : super(key: key);
 
   @override
-  State<CreateAccount> createState() => _CreateAccountState();
+  State<accountList> createState() => _accountListState();
 }
 
-class _CreateAccountState extends State<CreateAccount> {
+class _accountListState extends State<accountList> {
   @override
 
   //variables
@@ -23,43 +28,68 @@ class _CreateAccountState extends State<CreateAccount> {
       //header bar properties
       appBar: AppBar(
         title: Text(
-          'Passwords',
+          'Accounts',
           style: TextStyle(fontFamily: 'Mono'),
         ),
         centerTitle: true,
         backgroundColor: Colors.deepPurple[300],
+        actions: <Widget>[
+          IconButton(
+              padding: EdgeInsets.only(right: 50),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => createNewPassword(context),
+                );
+              },
+              icon: Icon(Icons.add))
+        ],
       ),
-      body: Container(
-          child: Container(
-              alignment: Alignment.center,
-              child: ElevatedButton.icon(
-                  //styling for button
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.deepPurple[300],
-                      fixedSize: const Size(500, 150),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      )),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) =>
-                          createNewPassword(context),
-                    );
-                  },
-                  //styling for button icon
-                  icon: const Icon(
-                    Icons.lock_open,
-                    color: Colors.white,
-                    size: 70,
-                  ),
-                  //button text
-                  label: Text(
-                    'Create New Password',
-                    style: TextStyle(fontSize: 50),
-                  )))),
+
+      body: ListView.builder(
+          itemCount: accounts.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        showAccountDetails(context, index),
+                  );
+                },
+                title: Text(accounts[index].service),
+              ),
+            );
+          }),
     );
   }
+}
+
+//display account details
+Widget showAccountDetails(BuildContext context, index) {
+  return new AlertDialog(
+    title: const Text('Account Details:'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Text(accounts[index].service),
+        Text(accounts[index].username),
+        Text(accounts[index].password),
+        Padding(padding: const EdgeInsets.all(20)),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.deepPurple[300],
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => accountList()));
+              print(accounts);
+            },
+            child: const Text("return to list")),
+      ],
+    ),
+  );
 }
 
 //new password form
@@ -70,7 +100,6 @@ Widget createNewPassword(BuildContext context) {
   TextEditingController newServiceController = new TextEditingController();
   TextEditingController newUsernameController = new TextEditingController();
   TextEditingController newPasswordController = new TextEditingController();
-  List<passwordType> accounts = [];
 
   return new AlertDialog(
     title: const Text('New service'),
@@ -113,10 +142,10 @@ Widget createNewPassword(BuildContext context) {
               primary: Colors.deepPurple[300],
             ),
             onPressed: () {
-              accounts
-                  .add(passwordType(newServiceValue, newUsername, newPassword));
+              accounts.add(account(newServiceValue, newUsername, newPassword));
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreateAccount()));
+                  MaterialPageRoute(builder: (context) => accountList()));
+              print(accounts);
             },
             child: const Text("Submit")),
       ],
