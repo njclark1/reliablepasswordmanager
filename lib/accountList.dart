@@ -8,7 +8,7 @@ import 'package:myapp/main.dart';
 import 'accountClass.dart';
 
 // list of accounts
-List<account> accounts = [];
+List<account> accounts = [account('test', 'test', 'test')];
 
 //build List screen
 class accountList extends StatefulWidget {
@@ -35,7 +35,6 @@ class _accountListState extends State<accountList> {
         backgroundColor: Colors.deepPurple[300],
         actions: <Widget>[
           IconButton(
-              padding: EdgeInsets.only(right: 50),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -59,6 +58,17 @@ class _accountListState extends State<accountList> {
                   );
                 },
                 title: Text(accounts[index].service),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete),
+                  color: Colors.red,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          deleteAccount(context, index),
+                    );
+                  },
+                ),
               ),
             );
           }),
@@ -67,15 +77,77 @@ class _accountListState extends State<accountList> {
 }
 
 //display account details
+Widget deleteAccount(BuildContext context, index) {
+  return ButtonBarTheme(
+      data: ButtonBarThemeData(alignment: MainAxisAlignment.center),
+      child: AlertDialog(
+        actionsAlignment: MainAxisAlignment.center,
+        titlePadding: EdgeInsets.all(20),
+        title: Text('Are you sure you would like to delete this account?'),
+        actions: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width * 0.20,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple[300],
+                  ),
+                  child: new Text(
+                    'Yes',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    accounts.removeAt(index);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => accountList()));
+                    print(accounts);
+                  },
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.01,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.20,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple[300],
+                  ),
+                  child: new Text(
+                    'No',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => accountList()));
+                    print(accounts);
+                  },
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+            ],
+          )
+        ],
+      ));
+}
+
+//display account details
 Widget showAccountDetails(BuildContext context, index) {
   return new AlertDialog(
     title: const Text('Account Details:'),
     content: new Column(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text(accounts[index].service),
-        Text(accounts[index].username),
-        Text(accounts[index].password),
+        Text('\nService:\n' + accounts[index].service),
+        Text('\nUsername:\n' + accounts[index].username),
+        Text('\nPassword:\n' + accounts[index].password),
         Padding(padding: const EdgeInsets.all(20)),
         ElevatedButton(
             style: ElevatedButton.styleFrom(
