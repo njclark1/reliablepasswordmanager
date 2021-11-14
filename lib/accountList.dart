@@ -207,6 +207,12 @@ Widget createNewPassword(BuildContext context) {
               border: UnderlineInputBorder(),
               hintText: 'enter password',
               labelText: 'Password'),
+          onFieldSubmitted: (String value) {
+            accounts.add(account(newServiceValue, newUsername, newPassword));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => accountList()));
+            print(accounts);
+          },
         ),
         Padding(padding: const EdgeInsets.all(20)),
         ElevatedButton(

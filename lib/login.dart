@@ -14,8 +14,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   @override
-  String correctUser = "password";
-  String correctPass = "username";
+  String correctUser = "nande";
+  String correctPass = "09791929";
   String givenUser = "";
   String givenPass = "";
   TextEditingController usernameController = new TextEditingController();
@@ -52,7 +52,7 @@ class _LoginState extends State<Login> {
                       givenUser = usernameController.text,
                   decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      hintText: 'username is password',
+                      hintText: 'both of us',
                       labelText: 'Username'),
                 ),
               ),
@@ -65,9 +65,20 @@ class _LoginState extends State<Login> {
                   onChanged: (String value) =>
                       givenPass = passwordController.text,
                   obscureText: true,
+                  onFieldSubmitted: (String value) {
+                    setState(() {
+                      if (givenUser == correctUser &&
+                          givenPass == correctPass) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => accountList()));
+                      }
+                    });
+                  },
                   decoration: const InputDecoration(
                       border: UnderlineInputBorder(),
-                      hintText: 'password is username',
+                      hintText: 'both of us',
                       labelText: 'Password'),
                 ),
               ),
